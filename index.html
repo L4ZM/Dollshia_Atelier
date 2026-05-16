@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dollshia Atelier - Pago</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #ffd6e5, #d9eef8);
+      color: #222;
+      min-height: 100vh;
+      padding: 18px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 430px;
+      background: #fff;
+      border-radius: 28px;
+      padding: 22px;
+      text-align: center;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+      border: 5px solid #b9d9e8;
+    }
+
+    .logo {
+      width: 210px;
+      max-width: 85%;
+      margin: 0 auto 10px;
+      display: block;
+    }
+
+    h1 {
+      margin: 8px 0 4px;
+      font-size: 28px;
+      color: #e7a1c8;
+    }
+
+    .hint {
+      font-size: 15px;
+      margin-bottom: 18px;
+      color: #555;
+    }
+
+    .account {
+      background: #fff5fa;
+      border: 2px solid #f1bdd8;
+      border-radius: 20px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .name {
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .bank {
+      color: #336b84;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .number {
+      font-size: 22px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      word-break: break-all;
+      background: #fff;
+      border-radius: 14px;
+      padding: 12px;
+      margin-bottom: 12px;
+      user-select: all;
+    }
+
+    button, .btn {
+      width: 100%;
+      border: none;
+      border-radius: 16px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 10px;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+      color: #fff;
+    }
+
+    .copy {
+      background: #e7a1c8;
+    }
+
+    .bbva {
+      background: #064b8e;
+    }
+
+    .whatsapp {
+      background: #25D366;
+    }
+
+    .note {
+      margin-top: 18px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .status {
+      min-height: 24px;
+      margin-top: 12px;
+      color: #16883a;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .footer {
+      margin-top: 14px;
+      font-size: 12px;
+      color: #777;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="card">
+    <img src="logo.png" alt="Dollshia Atelier" class="logo">
+
+    <h1>Dollshia Atelier</h1>
+    <p class="hint">Toca un botón para copiar</p>
+
+    <section class="account">
+      <div class="name">Samantha Castillo</div>
+      <div class="bank">BBVA</div>
+      <div class="number" onclick="selectText(this)">4152313983264149</div>
+      <button class="copy" onclick="copyText('4152313983264149')">
+        Copiar tarjeta Samantha
+      </button>
+    </section>
+
+    <section class="account">
+      <div class="name">Mireya Col</div>
+      <div class="bank">BBVA</div>
+      <div class="number" onclick="selectText(this)">4152314324577686</div>
+      <button class="copy" onclick="copyText('4152314324577686')">
+        Copiar tarjeta Mireya
+      </button>
+    </section>
+
+    <a class="btn bbva" href="bbva://">
+      Abrir app BBVA
+    </a>
+
+    <p class="note">Envía tu comprobante después de pagar</p>
+
+    <a class="btn whatsapp" href="https://wa.me/529981072877?text=Hola%2C%20te%20env%C3%ADo%20mi%20comprobante%20de%20pago%20para%20Dollshia%20Atelier.">
+      WhatsApp 998 107 2877
+    </a>
+
+    <a class="btn whatsapp" href="https://wa.me/529961120851?text=Hola%2C%20te%20env%C3%ADo%20mi%20comprobante%20de%20pago%20para%20Dollshia%20Atelier.">
+      WhatsApp 996 112 0851
+    </a>
+
+    <div id="status" class="status"></div>
+
+    <div class="footer">
+      Pago seguro desde QR o NFC
+    </div>
+  </main>
+
+  <script>
+    function copyText(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        document.getElementById("status").innerText = "✔ Copiado";
+        if (navigator.vibrate) navigator.vibrate(80);
+        setTimeout(() => {
+          document.getElementById("status").innerText = "";
+        }, 1800);
+      });
+    }
+
+    function selectText(element) {
+      const range = document.createRange();
+      range.selectNodeContents(element);
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }
+  </script>
+</body>
+</html>
